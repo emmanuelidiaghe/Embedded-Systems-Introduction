@@ -1,0 +1,36 @@
+﻿------ Build started: Project: Lab1, Configuration: Debug AVR ------
+Build started.
+Project "Lab1.cppproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "C:\Program Files (x86)\Atmel\Studio\7.0\Vs\Compiler.targets" from project "C:\Users\Emancipator\Documents\Atmel Studio\7.0\Lab Designs\Lab1\Lab1\Lab1\Lab1.cppproj" (target "Build" depends on it):
+	Task "RunCompilerTask"
+		Shell Utils Path C:\Program Files (x86)\Atmel\Studio\7.0\shellUtils
+		C:\Program Files (x86)\Atmel\Studio\7.0\shellUtils\make.exe all --jobs 4 --output-sync 
+		Building file: .././main.cpp
+		Invoking: AVR8/GNU C Compiler : 4.9.2
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe" -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega16 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega16" -c -MD -MP -MF "main.d" -MT"main.d" -MT"main.o"   -o "main.o" ".././main.cpp" 
+		Finished building: .././main.cpp
+		Building target: Lab1.elf
+		Invoking: AVR8/GNU Linker : 4.9.2
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe" -o Lab1.elf  main.o   -Wl,-Map="Lab1.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega16 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega16"  
+		Finished building target: Lab1.elf
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Lab1.elf" "Lab1.hex"
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Lab1.elf" "Lab1.eep" || exit 0
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Lab1.elf" > "Lab1.lss"
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Lab1.elf" "Lab1.srec"
+		"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Lab1.elf"
+		   text	   data	    bss	    dec	    hex	filename
+		    174	      0	      0	    174	     ae	Lab1.elf
+	Done executing task "RunCompilerTask".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	174 bytes   1.1 % Full
+				Data Memory Usage 		:	0 bytes   0.0 % Full
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "Lab1.cppproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "C:\Program Files (x86)\Atmel\Studio\7.0\Vs\Avr.common.targets" from project "C:\Users\Emancipator\Documents\Atmel Studio\7.0\Lab Designs\Lab1\Lab1\Lab1\Lab1.cppproj" (entry point):
+Done building target "Build" in project "Lab1.cppproj".
+Done building project "Lab1.cppproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

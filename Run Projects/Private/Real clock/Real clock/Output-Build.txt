@@ -1,0 +1,22 @@
+﻿------ Build started: Project: Real clock, Configuration: Debug AVR ------
+Build started.
+Project "Real clock.cppproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "C:\Program Files (x86)\Atmel\Studio\7.0\Vs\Compiler.targets" from project "C:\Users\Emancipator\Documents\Atmel Studio\7.0\Lab Designs\Run Projects\Private\Real clock\Real clock\Real clock.cppproj" (target "Build" depends on it):
+	Task "RunCompilerTask"
+		Shell Utils Path C:\Program Files (x86)\Atmel\Studio\7.0\shellUtils
+		C:\Program Files (x86)\Atmel\Studio\7.0\shellUtils\make.exe all --jobs 4 --output-sync 
+		make: Nothing to be done for 'all'.
+	Done executing task "RunCompilerTask".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	3602 bytes   22.0 % Full
+				Data Memory Usage 		:	352 bytes   34.4 % Full
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "Real clock.cppproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "C:\Program Files (x86)\Atmel\Studio\7.0\Vs\Avr.common.targets" from project "C:\Users\Emancipator\Documents\Atmel Studio\7.0\Lab Designs\Run Projects\Private\Real clock\Real clock\Real clock.cppproj" (entry point):
+Done building target "Build" in project "Real clock.cppproj".
+Done building project "Real clock.cppproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

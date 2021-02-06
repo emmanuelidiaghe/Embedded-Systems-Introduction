@@ -1,0 +1,430 @@
+
+counter using TCNT1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000228  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000027c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000027c  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002ac  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  000002e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000006b7  00000000  00000000  00000308  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005f0  00000000  00000000  000009bf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000031a  00000000  00000000  00000faf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  000012cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003c8  00000000  00000000  00001300  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000187  00000000  00000000  000016c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  0000184f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
+  64:	0c 94 12 01 	jmp	0x224	; 0x224 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <main>:
+#include <avr/io.h>
+#include <util/delay.h>
+
+
+int main(void)
+{
+  6c:	cf 93       	push	r28
+  6e:	df 93       	push	r29
+  70:	cd b7       	in	r28, 0x3d	; 61
+  72:	de b7       	in	r29, 0x3e	; 62
+  74:	a4 97       	sbiw	r28, 0x24	; 36
+  76:	0f b6       	in	r0, 0x3f	; 63
+  78:	f8 94       	cli
+  7a:	de bf       	out	0x3e, r29	; 62
+  7c:	0f be       	out	0x3f, r0	; 63
+  7e:	cd bf       	out	0x3d, r28	; 61
+	DDRA = 0xFF;  // set for output
+  80:	8f ef       	ldi	r24, 0xFF	; 255
+  82:	8a bb       	out	0x1a, r24	; 26
+	PORTA= 0x00;
+  84:	1b ba       	out	0x1b, r1	; 27
+	DDRC = 0xFF;  // set for output
+  86:	84 bb       	out	0x14, r24	; 20
+	PORTC= 0x00; 
+  88:	15 ba       	out	0x15, r1	; 21
+	DDRD = 0x00;  // set for input
+  8a:	11 ba       	out	0x11, r1	; 17
+	PORTD= 0x64;
+  8c:	84 e6       	ldi	r24, 0x64	; 100
+  8e:	82 bb       	out	0x12, r24	; 18
+	
+        int led1[9] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80}; //Array of LED shifts
+  90:	0f 2e       	mov	r0, r31
+  92:	f2 e1       	ldi	r31, 0x12	; 18
+  94:	df 2e       	mov	r13, r31
+  96:	f0 2d       	mov	r31, r0
+  98:	fe 01       	movw	r30, r28
+  9a:	73 96       	adiw	r30, 0x13	; 19
+  9c:	df 01       	movw	r26, r30
+  9e:	2d 2d       	mov	r18, r13
+  a0:	1d 92       	st	X+, r1
+  a2:	2a 95       	dec	r18
+  a4:	e9 f7       	brne	.-6      	; 0xa0 <main+0x34>
+  a6:	88 24       	eor	r8, r8
+  a8:	83 94       	inc	r8
+  aa:	91 2c       	mov	r9, r1
+  ac:	9c 8a       	std	Y+20, r9	; 0x14
+  ae:	8b 8a       	std	Y+19, r8	; 0x13
+  b0:	22 e0       	ldi	r18, 0x02	; 2
+  b2:	30 e0       	ldi	r19, 0x00	; 0
+  b4:	3e 8b       	std	Y+22, r19	; 0x16
+  b6:	2d 8b       	std	Y+21, r18	; 0x15
+  b8:	44 e0       	ldi	r20, 0x04	; 4
+  ba:	50 e0       	ldi	r21, 0x00	; 0
+  bc:	58 8f       	std	Y+24, r21	; 0x18
+  be:	4f 8b       	std	Y+23, r20	; 0x17
+  c0:	68 e0       	ldi	r22, 0x08	; 8
+  c2:	70 e0       	ldi	r23, 0x00	; 0
+  c4:	7a 8f       	std	Y+26, r23	; 0x1a
+  c6:	69 8f       	std	Y+25, r22	; 0x19
+  c8:	68 94       	set
+  ca:	66 24       	eor	r6, r6
+  cc:	64 f8       	bld	r6, 4
+  ce:	71 2c       	mov	r7, r1
+  d0:	7c 8e       	std	Y+28, r7	; 0x1c
+  d2:	6b 8e       	std	Y+27, r6	; 0x1b
+  d4:	a0 e2       	ldi	r26, 0x20	; 32
+  d6:	b0 e0       	ldi	r27, 0x00	; 0
+  d8:	be 8f       	std	Y+30, r27	; 0x1e
+  da:	ad 8f       	std	Y+29, r26	; 0x1d
+  dc:	00 e4       	ldi	r16, 0x40	; 64
+  de:	10 e0       	ldi	r17, 0x00	; 0
+  e0:	18 a3       	std	Y+32, r17	; 0x20
+  e2:	0f 8f       	std	Y+31, r16	; 0x1f
+  e4:	68 94       	set
+  e6:	ee 24       	eor	r14, r14
+  e8:	e7 f8       	bld	r14, 7
+  ea:	f1 2c       	mov	r15, r1
+  ec:	fa a2       	std	Y+34, r15	; 0x22
+  ee:	e9 a2       	std	Y+33, r14	; 0x21
+		int led2[9] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+  f0:	ce 01       	movw	r24, r28
+  f2:	01 96       	adiw	r24, 0x01	; 1
+  f4:	fc 01       	movw	r30, r24
+  f6:	11 92       	st	Z+, r1
+  f8:	da 94       	dec	r13
+  fa:	e9 f7       	brne	.-6      	; 0xf6 <main+0x8a>
+  fc:	fa 82       	std	Y+2, r15	; 0x02
+  fe:	e9 82       	std	Y+1, r14	; 0x01
+ 100:	1c 83       	std	Y+4, r17	; 0x04
+ 102:	0b 83       	std	Y+3, r16	; 0x03
+ 104:	be 83       	std	Y+6, r27	; 0x06
+ 106:	ad 83       	std	Y+5, r26	; 0x05
+ 108:	78 86       	std	Y+8, r7	; 0x08
+ 10a:	6f 82       	std	Y+7, r6	; 0x07
+ 10c:	7a 87       	std	Y+10, r23	; 0x0a
+ 10e:	69 87       	std	Y+9, r22	; 0x09
+ 110:	5c 87       	std	Y+12, r21	; 0x0c
+ 112:	4b 87       	std	Y+11, r20	; 0x0b
+ 114:	3e 87       	std	Y+14, r19	; 0x0e
+ 116:	2d 87       	std	Y+13, r18	; 0x0d
+ 118:	98 8a       	std	Y+16, r9	; 0x10
+ 11a:	8f 86       	std	Y+15, r8	; 0x0f
+		int count1  = 0;
+		int count2  = 0;
+		int a=0;
+		int button_pressed=0;
+
+	TCCR1B|=(1<<CS12); // using 256 pre-scaler
+ 11c:	8e b5       	in	r24, 0x2e	; 46
+ 11e:	84 60       	ori	r24, 0x04	; 4
+ 120:	8e bd       	out	0x2e, r24	; 46
+        int led1[9] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80}; //Array of LED shifts
+		int led2[9] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+		int count1  = 0;
+		int count2  = 0;
+		int a=0;
+		int button_pressed=0;
+ 122:	40 e0       	ldi	r20, 0x00	; 0
+ 124:	50 e0       	ldi	r21, 0x00	; 0
+	
+        int led1[9] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80}; //Array of LED shifts
+		int led2[9] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+		int count1  = 0;
+		int count2  = 0;
+		int a=0;
+ 126:	80 e0       	ldi	r24, 0x00	; 0
+ 128:	90 e0       	ldi	r25, 0x00	; 0
+	PORTD= 0x64;
+	
+        int led1[9] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80}; //Array of LED shifts
+		int led2[9] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+		int count1  = 0;
+		int count2  = 0;
+ 12a:	e0 e0       	ldi	r30, 0x00	; 0
+ 12c:	f0 e0       	ldi	r31, 0x00	; 0
+	DDRD = 0x00;  // set for input
+	PORTD= 0x64;
+	
+        int led1[9] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80}; //Array of LED shifts
+		int led2[9] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+		int count1  = 0;
+ 12e:	60 e0       	ldi	r22, 0x00	; 0
+ 130:	70 e0       	ldi	r23, 0x00	; 0
+					}
+		}
+		
+		else if (a>2)
+		{
+			button_pressed=0;
+ 132:	00 e0       	ldi	r16, 0x00	; 0
+ 134:	10 e0       	ldi	r17, 0x00	; 0
+ 136:	05 c0       	rjmp	.+10     	; 0x142 <main+0xd6>
+		{
+			PORTA = led1[count1];  //LEDs shift in 1/8th second
+			count1++;                
+			if (count1>7)
+			{
+				count1=0;
+ 138:	60 2f       	mov	r22, r16
+ 13a:	71 2f       	mov	r23, r17
+ 13c:	02 c0       	rjmp	.+4      	; 0x142 <main+0xd6>
+		{
+					PORTC = led2[count1];  //LEDs shift in 1/8th second
+					count1++;
+					if (count1>7)
+					{
+						count1=0;
+ 13e:	60 2f       	mov	r22, r16
+ 140:	71 2f       	mov	r23, r17
+	TCCR1B|=(1<<CS12); // using 256 pre-scaler
+	
+    /* Replace with your application code */
+    while (1) 
+    {
+		if ((PIND && (1<<PD6))==0)
+ 142:	20 b3       	in	r18, 0x10	; 16
+ 144:	21 11       	cpse	r18, r1
+ 146:	0c c0       	rjmp	.+24     	; 0x160 <main+0xf4>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 148:	2f ef       	ldi	r18, 0xFF	; 255
+ 14a:	30 e7       	ldi	r19, 0x70	; 112
+ 14c:	82 e0       	ldi	r24, 0x02	; 2
+ 14e:	21 50       	subi	r18, 0x01	; 1
+ 150:	30 40       	sbci	r19, 0x00	; 0
+ 152:	80 40       	sbci	r24, 0x00	; 0
+ 154:	e1 f7       	brne	.-8      	; 0x14e <main+0xe2>
+ 156:	00 c0       	rjmp	.+0      	; 0x158 <main+0xec>
+ 158:	00 00       	nop
+		{
+		   _delay_ms(50);
+			a=button_pressed+1;
+ 15a:	ca 01       	movw	r24, r20
+ 15c:	01 96       	adiw	r24, 0x01	; 1
+ 15e:	01 c0       	rjmp	.+2      	; 0x162 <main+0xf6>
+		}
+		else
+		{
+			button_pressed=a;
+ 160:	ac 01       	movw	r20, r24
+		}
+		if (TCNT1>=5859)  //set counter to 1/8th second
+ 162:	2c b5       	in	r18, 0x2c	; 44
+ 164:	3d b5       	in	r19, 0x2d	; 45
+ 166:	23 3e       	cpi	r18, 0xE3	; 227
+ 168:	36 41       	sbci	r19, 0x16	; 22
+ 16a:	58 f3       	brcs	.-42     	; 0x142 <main+0xd6>
+	{
+		TCNT1=0;
+ 16c:	1d bc       	out	0x2d, r1	; 45
+ 16e:	1c bc       	out	0x2c, r1	; 44
+		if(a==1)
+ 170:	81 30       	cpi	r24, 0x01	; 1
+ 172:	91 05       	cpc	r25, r1
+ 174:	39 f5       	brne	.+78     	; 0x1c4 <main+0x158>
+		{
+			PORTA = led1[count1];  //LEDs shift in 1/8th second
+ 176:	db 01       	movw	r26, r22
+ 178:	aa 0f       	add	r26, r26
+ 17a:	bb 1f       	adc	r27, r27
+ 17c:	21 e0       	ldi	r18, 0x01	; 1
+ 17e:	30 e0       	ldi	r19, 0x00	; 0
+ 180:	2c 0f       	add	r18, r28
+ 182:	3d 1f       	adc	r19, r29
+ 184:	a2 0f       	add	r26, r18
+ 186:	b3 1f       	adc	r27, r19
+ 188:	52 96       	adiw	r26, 0x12	; 18
+ 18a:	2c 91       	ld	r18, X
+ 18c:	2b bb       	out	0x1b, r18	; 27
+			count1++;                
+ 18e:	6f 5f       	subi	r22, 0xFF	; 255
+ 190:	7f 4f       	sbci	r23, 0xFF	; 255
+			if (count1>7)
+ 192:	68 30       	cpi	r22, 0x08	; 8
+ 194:	71 05       	cpc	r23, r1
+ 196:	ac f2       	brlt	.-86     	; 0x142 <main+0xd6>
+			{
+				count1=0;
+				PORTC = led1[count2];  //LEDs shift in 1 second
+ 198:	df 01       	movw	r26, r30
+ 19a:	aa 0f       	add	r26, r26
+ 19c:	bb 1f       	adc	r27, r27
+ 19e:	21 e0       	ldi	r18, 0x01	; 1
+ 1a0:	30 e0       	ldi	r19, 0x00	; 0
+ 1a2:	2c 0f       	add	r18, r28
+ 1a4:	3d 1f       	adc	r19, r29
+ 1a6:	a2 0f       	add	r26, r18
+ 1a8:	b3 1f       	adc	r27, r19
+ 1aa:	52 96       	adiw	r26, 0x12	; 18
+ 1ac:	2c 91       	ld	r18, X
+ 1ae:	25 bb       	out	0x15, r18	; 21
+				count2++;
+ 1b0:	31 96       	adiw	r30, 0x01	; 1
+				if (count2>7)
+ 1b2:	e8 30       	cpi	r30, 0x08	; 8
+ 1b4:	f1 05       	cpc	r31, r1
+ 1b6:	0c f4       	brge	.+2      	; 0x1ba <main+0x14e>
+ 1b8:	bf cf       	rjmp	.-130    	; 0x138 <main+0xcc>
+				{
+					count2=0;
+ 1ba:	e0 2f       	mov	r30, r16
+ 1bc:	f1 2f       	mov	r31, r17
+		{
+			PORTA = led1[count1];  //LEDs shift in 1/8th second
+			count1++;                
+			if (count1>7)
+			{
+				count1=0;
+ 1be:	60 2f       	mov	r22, r16
+ 1c0:	71 2f       	mov	r23, r17
+ 1c2:	bf cf       	rjmp	.-130    	; 0x142 <main+0xd6>
+					count2=0;
+				}
+			}
+		}
+	
+		else if (a==2)
+ 1c4:	82 30       	cpi	r24, 0x02	; 2
+ 1c6:	91 05       	cpc	r25, r1
+ 1c8:	31 f5       	brne	.+76     	; 0x216 <main+0x1aa>
+		{
+					PORTC = led2[count1];  //LEDs shift in 1/8th second
+ 1ca:	db 01       	movw	r26, r22
+ 1cc:	aa 0f       	add	r26, r26
+ 1ce:	bb 1f       	adc	r27, r27
+ 1d0:	21 e0       	ldi	r18, 0x01	; 1
+ 1d2:	30 e0       	ldi	r19, 0x00	; 0
+ 1d4:	2c 0f       	add	r18, r28
+ 1d6:	3d 1f       	adc	r19, r29
+ 1d8:	a2 0f       	add	r26, r18
+ 1da:	b3 1f       	adc	r27, r19
+ 1dc:	2c 91       	ld	r18, X
+ 1de:	25 bb       	out	0x15, r18	; 21
+					count1++;
+ 1e0:	6f 5f       	subi	r22, 0xFF	; 255
+ 1e2:	7f 4f       	sbci	r23, 0xFF	; 255
+					if (count1>7)
+ 1e4:	68 30       	cpi	r22, 0x08	; 8
+ 1e6:	71 05       	cpc	r23, r1
+ 1e8:	0c f4       	brge	.+2      	; 0x1ec <main+0x180>
+ 1ea:	ab cf       	rjmp	.-170    	; 0x142 <main+0xd6>
+					{
+						count1=0;
+						PORTA = led2[count2];  //LEDs shift in 1 second
+ 1ec:	df 01       	movw	r26, r30
+ 1ee:	aa 0f       	add	r26, r26
+ 1f0:	bb 1f       	adc	r27, r27
+ 1f2:	21 e0       	ldi	r18, 0x01	; 1
+ 1f4:	30 e0       	ldi	r19, 0x00	; 0
+ 1f6:	2c 0f       	add	r18, r28
+ 1f8:	3d 1f       	adc	r19, r29
+ 1fa:	a2 0f       	add	r26, r18
+ 1fc:	b3 1f       	adc	r27, r19
+ 1fe:	2c 91       	ld	r18, X
+ 200:	2b bb       	out	0x1b, r18	; 27
+						count2++;
+ 202:	31 96       	adiw	r30, 0x01	; 1
+						if (count2>7)
+ 204:	e8 30       	cpi	r30, 0x08	; 8
+ 206:	f1 05       	cpc	r31, r1
+ 208:	0c f4       	brge	.+2      	; 0x20c <main+0x1a0>
+ 20a:	99 cf       	rjmp	.-206    	; 0x13e <main+0xd2>
+						{
+							count2=0;
+ 20c:	e0 2f       	mov	r30, r16
+ 20e:	f1 2f       	mov	r31, r17
+		{
+					PORTC = led2[count1];  //LEDs shift in 1/8th second
+					count1++;
+					if (count1>7)
+					{
+						count1=0;
+ 210:	60 2f       	mov	r22, r16
+ 212:	71 2f       	mov	r23, r17
+ 214:	96 cf       	rjmp	.-212    	; 0x142 <main+0xd6>
+							count2=0;
+						}
+					}
+		}
+		
+		else if (a>2)
+ 216:	83 30       	cpi	r24, 0x03	; 3
+ 218:	91 05       	cpc	r25, r1
+ 21a:	0c f4       	brge	.+2      	; 0x21e <main+0x1b2>
+ 21c:	92 cf       	rjmp	.-220    	; 0x142 <main+0xd6>
+		{
+			button_pressed=0;
+ 21e:	40 2f       	mov	r20, r16
+ 220:	51 2f       	mov	r21, r17
+ 222:	8f cf       	rjmp	.-226    	; 0x142 <main+0xd6>
+
+00000224 <_exit>:
+ 224:	f8 94       	cli
+
+00000226 <__stop_program>:
+ 226:	ff cf       	rjmp	.-2      	; 0x226 <__stop_program>

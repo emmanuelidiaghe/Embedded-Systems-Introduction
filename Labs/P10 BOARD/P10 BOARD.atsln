@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "P10 BOARD", "P10 BOARD\P10 BOARD.cppproj", "{025544A3-42C3-434F-9DBF-966D823F4473}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{025544A3-42C3-434F-9DBF-966D823F4473}.Debug|AVR.ActiveCfg = Debug|AVR
+		{025544A3-42C3-434F-9DBF-966D823F4473}.Debug|AVR.Build.0 = Debug|AVR
+		{025544A3-42C3-434F-9DBF-966D823F4473}.Release|AVR.ActiveCfg = Release|AVR
+		{025544A3-42C3-434F-9DBF-966D823F4473}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

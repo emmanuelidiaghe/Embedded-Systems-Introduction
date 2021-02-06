@@ -1,0 +1,338 @@
+
+LFCharger.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001d2  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000246  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  00800060  00800060  00000246  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000246  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000278  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000068  00000000  00000000  000002b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000991  00000000  00000000  0000031c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000732  00000000  00000000  00000cad  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000052c  00000000  00000000  000013df  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000f8  00000000  00000000  0000190c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000497  00000000  00000000  00001a04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000002e4  00000000  00000000  00001e9b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000058  00000000  00000000  0000217f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 d3 00 	jmp	0x1a6	; 0x1a6 <__vector_19>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e2 ed       	ldi	r30, 0xD2	; 210
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a4 36       	cpi	r26, 0x64	; 100
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 54 00 	call	0xa8	; 0xa8 <main>
+  8a:	0c 94 e7 00 	jmp	0x1ce	; 0x1ce <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <_Z14analogeReadPinh>:
+
+uint16_t analogeReadPin(uint8_t ch){
+
+	ch &= 0b00000111;  // AND operation with 7
+	
+	ADMUX = (ADMUX & 0xF8)|ch; // clears the bottom 3 bits before ORing
+  92:	97 b1       	in	r25, 0x07	; 7
+	
+}
+
+uint16_t analogeReadPin(uint8_t ch){
+
+	ch &= 0b00000111;  // AND operation with 7
+  94:	87 70       	andi	r24, 0x07	; 7
+	
+	ADMUX = (ADMUX & 0xF8)|ch; // clears the bottom 3 bits before ORing
+  96:	98 7f       	andi	r25, 0xF8	; 248
+  98:	89 2b       	or	r24, r25
+  9a:	87 b9       	out	0x07, r24	; 7
+	
+	ADCSRA |= (1<<ADSC);           // start single conversion
+  9c:	36 9a       	sbi	0x06, 6	; 6
+	
+	while(ADCSRA & (1<<ADSC));    // wait for conversion to complete
+  9e:	36 99       	sbic	0x06, 6	; 6
+  a0:	fe cf       	rjmp	.-4      	; 0x9e <_Z14analogeReadPinh+0xc>
+	return (ADC);
+  a2:	84 b1       	in	r24, 0x04	; 4
+  a4:	95 b1       	in	r25, 0x05	; 5
+}
+  a6:	08 95       	ret
+
+000000a8 <main>:
+
+#include "C://Emancipator/Emancipator.h"
+
+	int main(void) 
+	{
+		DDRD = (1<<DDD4)|(1<<DDD5); //PWM Pins
+  a8:	80 e3       	ldi	r24, 0x30	; 48
+  aa:	81 bb       	out	0x11, r24	; 17
+		PORTD |=  (1<<PD4);
+  ac:	94 9a       	sbi	0x12, 4	; 18
+		PORTD &= ~(1<<PD5);
+  ae:	95 98       	cbi	0x12, 5	; 18
+#define VREFF_256    3
+
+
+void analogRefInit( uint8_t vreff){
+	
+	ADMUX = (vreff << 6);  //(1<<REFS1)|(1<<REFS0);
+  b0:	80 e4       	ldi	r24, 0x40	; 64
+  b2:	87 b9       	out	0x07, r24	; 7
+	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(0<<ADPS0);
+  b4:	86 e8       	ldi	r24, 0x86	; 134
+  b6:	86 b9       	out	0x06, r24	; 6
+		
+		analogRefInit(VREFF_AVCC);
+		
+		cli();//Disable Interrupts
+  b8:	f8 94       	cli
+		
+		TCCR1A = 0b10100001;
+  ba:	81 ea       	ldi	r24, 0xA1	; 161
+  bc:	8f bd       	out	0x2f, r24	; 47
+		TCCR1B = 0b00000011;
+  be:	83 e0       	ldi	r24, 0x03	; 3
+  c0:	8e bd       	out	0x2e, r24	; 46
+		TCCR0  = 0b00001010;
+  c2:	8a e0       	ldi	r24, 0x0A	; 10
+  c4:	83 bf       	out	0x33, r24	; 51
+		OCR0   = 123;
+  c6:	8b e7       	ldi	r24, 0x7B	; 123
+  c8:	8c bf       	out	0x3c, r24	; 60
+
+
+		TIMSK |=(1 << OCIE0);
+  ca:	89 b7       	in	r24, 0x39	; 57
+  cc:	82 60       	ori	r24, 0x02	; 2
+  ce:	89 bf       	out	0x39, r24	; 57
+
+		sei();//Enable Interrupts
+  d0:	78 94       	sei
+		
+		while(1)
+		{
+			Vout = analogeReadPin(0);
+  d2:	80 e0       	ldi	r24, 0x00	; 0
+  d4:	0e 94 49 00 	call	0x92	; 0x92 <_Z14analogeReadPinh>
+  d8:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <Vout+0x1>
+  dc:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Vout>
+			
+			while (Vout < 510) {
+  e0:	21 c0       	rjmp	.+66     	; 0x124 <main+0x7c>
+				if (Duty == 30) {
+  e2:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_end>
+  e6:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__data_end+0x1>
+  ea:	8e 31       	cpi	r24, 0x1E	; 30
+  ec:	91 05       	cpc	r25, r1
+  ee:	41 f4       	brne	.+16     	; 0x100 <main+0x58>
+					Vout = analogeReadPin(0);
+  f0:	80 e0       	ldi	r24, 0x00	; 0
+  f2:	0e 94 49 00 	call	0x92	; 0x92 <_Z14analogeReadPinh>
+  f6:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <Vout+0x1>
+  fa:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Vout>
+  fe:	12 c0       	rjmp	.+36     	; 0x124 <main+0x7c>
+				}
+				else {
+					Duty = Duty + 1;
+ 100:	01 96       	adiw	r24, 0x01	; 1
+ 102:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__data_end+0x1>
+ 106:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_end>
+					Vout = analogeReadPin(0);
+ 10a:	80 e0       	ldi	r24, 0x00	; 0
+ 10c:	0e 94 49 00 	call	0x92	; 0x92 <_Z14analogeReadPinh>
+ 110:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <Vout+0x1>
+ 114:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Vout>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 118:	8f e9       	ldi	r24, 0x9F	; 159
+ 11a:	9f e0       	ldi	r25, 0x0F	; 15
+ 11c:	01 97       	sbiw	r24, 0x01	; 1
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <main+0x74>
+ 120:	00 c0       	rjmp	.+0      	; 0x122 <main+0x7a>
+ 122:	00 00       	nop
+		
+		while(1)
+		{
+			Vout = analogeReadPin(0);
+			
+			while (Vout < 510) {
+ 124:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <Vout>
+ 128:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <Vout+0x1>
+ 12c:	8e 3f       	cpi	r24, 0xFE	; 254
+ 12e:	21 e0       	ldi	r18, 0x01	; 1
+ 130:	92 07       	cpc	r25, r18
+ 132:	bc f2       	brlt	.-82     	; 0xe2 <main+0x3a>
+					Duty = Duty + 1;
+					Vout = analogeReadPin(0);
+					_delay_ms(1);
+				}
+			}
+			while (Vout>510 && Vout<530) Vout = analogeReadPin(0);
+ 134:	8f 5f       	subi	r24, 0xFF	; 255
+ 136:	91 40       	sbci	r25, 0x01	; 1
+ 138:	43 97       	sbiw	r24, 0x13	; 19
+ 13a:	68 f5       	brcc	.+90     	; 0x196 <main+0xee>
+ 13c:	80 e0       	ldi	r24, 0x00	; 0
+ 13e:	0e 94 49 00 	call	0x92	; 0x92 <_Z14analogeReadPinh>
+ 142:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <Vout+0x1>
+ 146:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Vout>
+ 14a:	8f 5f       	subi	r24, 0xFF	; 255
+ 14c:	91 40       	sbci	r25, 0x01	; 1
+ 14e:	43 97       	sbiw	r24, 0x13	; 19
+ 150:	a8 f3       	brcs	.-22     	; 0x13c <main+0x94>
+ 152:	21 c0       	rjmp	.+66     	; 0x196 <main+0xee>
+			while (Vout > 530) {
+				if (Duty == 1) {
+ 154:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_end>
+ 158:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__data_end+0x1>
+ 15c:	81 30       	cpi	r24, 0x01	; 1
+ 15e:	91 05       	cpc	r25, r1
+ 160:	41 f4       	brne	.+16     	; 0x172 <main+0xca>
+					Vout = analogeReadPin(0);
+ 162:	80 e0       	ldi	r24, 0x00	; 0
+ 164:	0e 94 49 00 	call	0x92	; 0x92 <_Z14analogeReadPinh>
+ 168:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <Vout+0x1>
+ 16c:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Vout>
+ 170:	12 c0       	rjmp	.+36     	; 0x196 <main+0xee>
+				}
+				else {
+					Duty = Duty - 1;
+ 172:	01 97       	sbiw	r24, 0x01	; 1
+ 174:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__data_end+0x1>
+ 178:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_end>
+					Vout = analogeReadPin(0);
+ 17c:	80 e0       	ldi	r24, 0x00	; 0
+ 17e:	0e 94 49 00 	call	0x92	; 0x92 <_Z14analogeReadPinh>
+ 182:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <Vout+0x1>
+ 186:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Vout>
+ 18a:	8f e9       	ldi	r24, 0x9F	; 159
+ 18c:	9f e0       	ldi	r25, 0x0F	; 15
+ 18e:	01 97       	sbiw	r24, 0x01	; 1
+ 190:	f1 f7       	brne	.-4      	; 0x18e <main+0xe6>
+ 192:	00 c0       	rjmp	.+0      	; 0x194 <main+0xec>
+ 194:	00 00       	nop
+					Vout = analogeReadPin(0);
+					_delay_ms(1);
+				}
+			}
+			while (Vout>510 && Vout<530) Vout = analogeReadPin(0);
+			while (Vout > 530) {
+ 196:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <Vout>
+ 19a:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <Vout+0x1>
+ 19e:	83 31       	cpi	r24, 0x13	; 19
+ 1a0:	92 40       	sbci	r25, 0x02	; 2
+ 1a2:	c4 f6       	brge	.-80     	; 0x154 <main+0xac>
+ 1a4:	96 cf       	rjmp	.-212    	; 0xd2 <main+0x2a>
+
+000001a6 <__vector_19>:
+			}
+		}
+	}
+
+	ISR(TIMER0_COMP_vect)
+	{
+ 1a6:	1f 92       	push	r1
+ 1a8:	0f 92       	push	r0
+ 1aa:	0f b6       	in	r0, 0x3f	; 63
+ 1ac:	0f 92       	push	r0
+ 1ae:	11 24       	eor	r1, r1
+ 1b0:	8f 93       	push	r24
+ 1b2:	9f 93       	push	r25
+		int ok = 230;
+			OCR1A = ok;
+ 1b4:	86 ee       	ldi	r24, 0xE6	; 230
+ 1b6:	90 e0       	ldi	r25, 0x00	; 0
+ 1b8:	9b bd       	out	0x2b, r25	; 43
+ 1ba:	8a bd       	out	0x2a, r24	; 42
+			OCR1B = ok;
+ 1bc:	99 bd       	out	0x29, r25	; 41
+ 1be:	88 bd       	out	0x28, r24	; 40
+	}
+ 1c0:	9f 91       	pop	r25
+ 1c2:	8f 91       	pop	r24
+ 1c4:	0f 90       	pop	r0
+ 1c6:	0f be       	out	0x3f, r0	; 63
+ 1c8:	0f 90       	pop	r0
+ 1ca:	1f 90       	pop	r1
+ 1cc:	18 95       	reti
+
+000001ce <_exit>:
+ 1ce:	f8 94       	cli
+
+000001d0 <__stop_program>:
+ 1d0:	ff cf       	rjmp	.-2      	; 0x1d0 <__stop_program>

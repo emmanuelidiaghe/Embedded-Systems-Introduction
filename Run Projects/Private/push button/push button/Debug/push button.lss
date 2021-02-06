@@ -1,0 +1,292 @@
+
+push button.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000011c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000170  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000170  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001a0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  000001dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000006b0  00000000  00000000  000001fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005f0  00000000  00000000  000008ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000308  00000000  00000000  00000e9c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  000011a4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000039a  00000000  00000000  000011c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000a0  00000000  00000000  00001562  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  00001602  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
+  64:	0c 94 8c 00 	jmp	0x118	; 0x118 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <main>:
+#include <util/delay.h>
+
+
+int main(void)
+{
+      DDRA=0xFF;
+  6c:	8f ef       	ldi	r24, 0xFF	; 255
+  6e:	8a bb       	out	0x1a, r24	; 26
+	  PORTA=0x00;
+  70:	1b ba       	out	0x1b, r1	; 27
+	  DDRD=0x00;
+  72:	11 ba       	out	0x11, r1	; 17
+	  PORTD=0x40;
+  74:	80 e4       	ldi	r24, 0x40	; 64
+  76:	82 bb       	out	0x12, r24	; 18
+	  
+	  int led_on[9]={0x01,0x03,0x07,0x0F,0x1F,0x3F,0x7F,0xFF};
+	  int a=0;
+	  int button_pressed=0;
+  78:	20 e0       	ldi	r18, 0x00	; 0
+  7a:	30 e0       	ldi	r19, 0x00	; 0
+	  PORTA=0x00;
+	  DDRD=0x00;
+	  PORTD=0x40;
+	  
+	  int led_on[9]={0x01,0x03,0x07,0x0F,0x1F,0x3F,0x7F,0xFF};
+	  int a=0;
+  7c:	80 e0       	ldi	r24, 0x00	; 0
+  7e:	90 e0       	ldi	r25, 0x00	; 0
+		  {
+			   PORTA=led_on[8];
+		  }
+		  else if (a==10)
+		  {
+			   button_pressed=0;
+  80:	d0 e0       	ldi	r29, 0x00	; 0
+  82:	c0 e0       	ldi	r28, 0x00	; 0
+		  {
+			   PORTA=led_on[6];
+		  }
+		  else if (a==8)
+		  {
+			   PORTA=led_on[7];
+  84:	bf ef       	ldi	r27, 0xFF	; 255
+		  {
+			   PORTA=led_on[5];
+		  }
+		  else if (a==7)
+		  {
+			   PORTA=led_on[6];
+  86:	af e7       	ldi	r26, 0x7F	; 127
+		  {
+			  PORTA=led_on[4];
+		  }
+		  else if (a==6)
+		  {
+			   PORTA=led_on[5];
+  88:	ff e3       	ldi	r31, 0x3F	; 63
+		  {
+			  PORTA=led_on[3];
+		  } 
+		  else if (a==5)
+		  {
+			  PORTA=led_on[4];
+  8a:	ef e1       	ldi	r30, 0x1F	; 31
+		  {
+			  PORTA=led_on[2];
+		  }
+		  else if (a==4)
+		  {
+			  PORTA=led_on[3];
+  8c:	7f e0       	ldi	r23, 0x0F	; 15
+		  {
+			  PORTA=led_on[1];
+		  }
+		  else if (a==3)
+		  {
+			  PORTA=led_on[2];
+  8e:	67 e0       	ldi	r22, 0x07	; 7
+		  {
+			  PORTA=led_on[0];
+		  }
+		  else if (a==2)
+		  {
+			  PORTA=led_on[1];
+  90:	53 e0       	ldi	r21, 0x03	; 3
+	      else {
+			  button_pressed=a;
+		       }	 
+		   if(a==1)  
+		  {
+			  PORTA=led_on[0];
+  92:	41 e0       	ldi	r20, 0x01	; 1
+	  int a=0;
+	  int button_pressed=0;
+	  
+		  while(1)
+		{		  
+			  if ((PIND & (1<<PD6))==0)
+  94:	86 99       	sbic	0x10, 6	; 16
+  96:	0c c0       	rjmp	.+24     	; 0xb0 <main+0x44>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  98:	1f eb       	ldi	r17, 0xBF	; 191
+  9a:	84 ed       	ldi	r24, 0xD4	; 212
+  9c:	91 e0       	ldi	r25, 0x01	; 1
+  9e:	11 50       	subi	r17, 0x01	; 1
+  a0:	80 40       	sbci	r24, 0x00	; 0
+  a2:	90 40       	sbci	r25, 0x00	; 0
+  a4:	e1 f7       	brne	.-8      	; 0x9e <main+0x32>
+  a6:	00 c0       	rjmp	.+0      	; 0xa8 <main+0x3c>
+  a8:	00 00       	nop
+			  {
+				  _delay_ms(50);
+				  a=button_pressed + 1;
+  aa:	c9 01       	movw	r24, r18
+  ac:	01 96       	adiw	r24, 0x01	; 1
+  ae:	01 c0       	rjmp	.+2      	; 0xb2 <main+0x46>
+			  }
+	      else {
+			  button_pressed=a;
+  b0:	9c 01       	movw	r18, r24
+		       }	 
+		   if(a==1)  
+  b2:	81 30       	cpi	r24, 0x01	; 1
+  b4:	91 05       	cpc	r25, r1
+  b6:	11 f4       	brne	.+4      	; 0xbc <main+0x50>
+		  {
+			  PORTA=led_on[0];
+  b8:	4b bb       	out	0x1b, r20	; 27
+  ba:	ec cf       	rjmp	.-40     	; 0x94 <main+0x28>
+		  }
+		  else if (a==2)
+  bc:	82 30       	cpi	r24, 0x02	; 2
+  be:	91 05       	cpc	r25, r1
+  c0:	11 f4       	brne	.+4      	; 0xc6 <main+0x5a>
+		  {
+			  PORTA=led_on[1];
+  c2:	5b bb       	out	0x1b, r21	; 27
+  c4:	e7 cf       	rjmp	.-50     	; 0x94 <main+0x28>
+		  }
+		  else if (a==3)
+  c6:	83 30       	cpi	r24, 0x03	; 3
+  c8:	91 05       	cpc	r25, r1
+  ca:	11 f4       	brne	.+4      	; 0xd0 <main+0x64>
+		  {
+			  PORTA=led_on[2];
+  cc:	6b bb       	out	0x1b, r22	; 27
+  ce:	e2 cf       	rjmp	.-60     	; 0x94 <main+0x28>
+		  }
+		  else if (a==4)
+  d0:	84 30       	cpi	r24, 0x04	; 4
+  d2:	91 05       	cpc	r25, r1
+  d4:	11 f4       	brne	.+4      	; 0xda <main+0x6e>
+		  {
+			  PORTA=led_on[3];
+  d6:	7b bb       	out	0x1b, r23	; 27
+  d8:	dd cf       	rjmp	.-70     	; 0x94 <main+0x28>
+		  } 
+		  else if (a==5)
+  da:	85 30       	cpi	r24, 0x05	; 5
+  dc:	91 05       	cpc	r25, r1
+  de:	11 f4       	brne	.+4      	; 0xe4 <main+0x78>
+		  {
+			  PORTA=led_on[4];
+  e0:	eb bb       	out	0x1b, r30	; 27
+  e2:	d8 cf       	rjmp	.-80     	; 0x94 <main+0x28>
+		  }
+		  else if (a==6)
+  e4:	86 30       	cpi	r24, 0x06	; 6
+  e6:	91 05       	cpc	r25, r1
+  e8:	11 f4       	brne	.+4      	; 0xee <main+0x82>
+		  {
+			   PORTA=led_on[5];
+  ea:	fb bb       	out	0x1b, r31	; 27
+  ec:	d3 cf       	rjmp	.-90     	; 0x94 <main+0x28>
+		  }
+		  else if (a==7)
+  ee:	87 30       	cpi	r24, 0x07	; 7
+  f0:	91 05       	cpc	r25, r1
+  f2:	11 f4       	brne	.+4      	; 0xf8 <main+0x8c>
+		  {
+			   PORTA=led_on[6];
+  f4:	ab bb       	out	0x1b, r26	; 27
+  f6:	ce cf       	rjmp	.-100    	; 0x94 <main+0x28>
+		  }
+		  else if (a==8)
+  f8:	88 30       	cpi	r24, 0x08	; 8
+  fa:	91 05       	cpc	r25, r1
+  fc:	11 f4       	brne	.+4      	; 0x102 <main+0x96>
+		  {
+			   PORTA=led_on[7];
+  fe:	bb bb       	out	0x1b, r27	; 27
+ 100:	c9 cf       	rjmp	.-110    	; 0x94 <main+0x28>
+		  }
+		  else if (a==9)
+ 102:	89 30       	cpi	r24, 0x09	; 9
+ 104:	91 05       	cpc	r25, r1
+ 106:	11 f4       	brne	.+4      	; 0x10c <main+0xa0>
+		  {
+			   PORTA=led_on[8];
+ 108:	1b ba       	out	0x1b, r1	; 27
+ 10a:	c4 cf       	rjmp	.-120    	; 0x94 <main+0x28>
+		  }
+		  else if (a==10)
+ 10c:	8a 30       	cpi	r24, 0x0A	; 10
+ 10e:	91 05       	cpc	r25, r1
+ 110:	09 f6       	brne	.-126    	; 0x94 <main+0x28>
+		  {
+			   button_pressed=0;
+ 112:	2d 2f       	mov	r18, r29
+ 114:	3c 2f       	mov	r19, r28
+ 116:	be cf       	rjmp	.-132    	; 0x94 <main+0x28>
+
+00000118 <_exit>:
+ 118:	f8 94       	cli
+
+0000011a <__stop_program>:
+ 11a:	ff cf       	rjmp	.-2      	; 0x11a <__stop_program>
